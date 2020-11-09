@@ -1,0 +1,44 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container pt-3">
+        <form id="signup" method="post" action="">
+            <div><span class="label">Enter Meeting Date </span>
+                <input type="text" class="infobox form-control" name="dob" />
+                <span class="error text-danger"> Invalid Meeting Date. Correct format is mm-dd-yyyy
+                </span>
+            </div>
+            <input class="submit btn btn-secondary" type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.error').hide();  //kelas dengan nama error disembunyikan terlebih dahulu
+            $('.submit').click(function (event) { //ketika tombol submit di klik
+                var data = $('.infobox').val(); //mengecek inputan dengan kelas infobox
+                if (validate_date(data)) { //apabila data sesuai syarat
+                    $('.error').hide(); // maka error tidak ditampilkan
+                }
+                else { // apabila data tidak sesuai syarat
+                    $('.error').show();  // maka error baru akan ditampilkan
+                    event.preventDefault();// mencegah dari submitting form
+                }
+            });
+        });
+        function validate_date(date) { //membuat syarat boolean true or false
+            var pattern = new RegExp(/\b\d{1,2}[\-]\d{1,2}[\-]\d{4}\b/); // \b adalah batas
+            /* d{1,2} merupakan jumlah digit, untuk d pertama dan kedua 
+            bisa diisi 1 atau 2 digit*/
+            // d{4} berarti diisi 4 digit
+            //  [\-] boleh diisi tanda -    
+
+
+            return pattern.test(date);// mengembalikan nilai eksekusi
+        }
+
+    </script>
+
+</body>
